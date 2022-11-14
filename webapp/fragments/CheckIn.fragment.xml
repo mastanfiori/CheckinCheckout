@@ -1,0 +1,116 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:table="sap.ui.table" xmlns:smartTable="sap.ui.comp.smarttable">
+	<smartTable:SmartTable id="CheckInSmartTab" showFullScreenButton="false" entitySet="ZC_SD_GuaranteeDates_Maint_Rep" useExportToExcel="true"
+		smartFilterId="MCsmartFilterBar" exportType="GW" useVariantManagement="false" beforeRebindTable="onMCRebindTable"
+		useTablePersonalisation="true" tableType="Table" beforeExport="onMassExcelDownload"
+		persistencyKey="SmartTabSalesContracts_MassChanges_ExcelUPLD" enableAutoBinding="false" visible="true" showRowCount="false"
+		tableBindingPath="CheckInModel>/">
+		<smartTable:customToolbar>
+			<OverflowToolbar style="Clear">
+				<!--<Title id="title" text="Materials ({=${materialList>/}.length})"/>-->
+				<!--<core:Icon src="sap-icon://information" press="onStatusCount"></core:Icon>-->
+				<ToolbarSpacer/>
+				<!--<Button text="{i18n>Download}" press="onExcelTemplateDownload" type="Transparent"></Button>-->
+				<Button id="CheckInBtn" text="{i18n>Checkin}" press="onCheckIn" type="Transparent" enabled="false"/>
+			</OverflowToolbar>
+		</smartTable:customToolbar>
+		<table:Table id="CheckInTab" editable="true" enableColumnFreeze="true" selectionMode="Multi" rows="{CheckInModel>/}"
+			rowSelectionChange="onCheckInItemsSelect">
+			<table:columns>
+				<table:Column autoResizable="true" width="150px" tooltip="{i18n>ProductionOrder}" sortProperty="ProductionOrder">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "ProductionOrder", "leadingProperty": "ProductionOrder"}'/>
+					</table:customData>
+					<Label text="{i18n>ProductionOrder}"/>
+					<table:template>
+						<Input value="{CheckInModel>ProductionOrder}"/>
+					</table:template>
+				</table:Column>
+				<table:Column autoResizable="true" width="150px" tooltip="{i18n>OperationNumber}" sortProperty="OperationNumber"
+					filterProperty="OperationNumber">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "OperationNumber", "leadingProperty": "OperationNumber"}'/>
+					</table:customData>
+					<Label text="{i18n>OperationNumber}"/>
+					<table:template>
+						<Input value="{CheckInModel>OperationNumber}"/>
+					</table:template>
+				</table:Column>
+				<table:Column autoResizable="true" width="150px" tooltip="{i18n>SetupRun}" sortProperty="SetupRun" filterProperty="SetupRun">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "SetupRun", "leadingProperty": "SetupRun"}'/>
+					</table:customData>
+					<Label text="{i18n>SetupRun}"/>
+					<table:template>
+						<!--<Text text="{CheckInModel>SetupRun}"/>-->
+						<ComboBox selectedKey="{CheckInModel>SetupRun}">
+							<items>
+								<core:Item key="Setup" text="Setup"/>
+								<core:Item key="Run" text="Run"/>
+							</items>
+						</ComboBox>
+					</table:template>
+				</table:Column>
+				<table:Column autoResizable="true" width="150px" tooltip="{i18n>EquipmentNumber}">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "EquipmentNumber", "leadingProperty": "EquipmentNumber"}'/>
+					</table:customData>
+					<Label text="{i18n>EquipmentNumber}"/>
+					<table:template>
+						<Input value="{CheckInModel>EquipmentNumber}"/>
+					</table:template>
+				</table:Column>
+				<table:Column autoResizable="true" hAlign="Right" width="250px" tooltip="{i18n>CheckInDate}">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "CheckInDate", "leadingProperty": "CheckInDate"}'/>
+					</table:customData>
+					<Label text="{i18n>CheckInDate}"/>
+					<table:template>
+						<!--<Text text="{path:'CheckInModel>CheckInDate',type: 'sap.ui.model.type.Date',formatOptions: { UTC: true } }"/>-->
+						<DatePicker value="{CheckInModel>CheckInDate}" valueFormat="yyyy-MM-dd" displayFormat="long" change="handleChange"
+							class="sapUiSmallMarginBottom"/>
+					</table:template>
+				</table:Column>
+				<!--Changes made from BackMaterial to BackorderMaterial-->
+				<table:Column autoResizable="true" hAlign="Right" width="150px" tooltip="{i18n>CheckInTime}">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "CheckInTime", "leadingProperty": "CheckInTime"}'/>
+					</table:customData>
+					<Label text="{i18n>CheckInTime}"/>
+					<table:template>
+						<!--<Text text="{CheckInModel>CheckInTime}"></Text>-->
+						<TimePicker valueFormat="HH:mm:ss" displayFormat="HH:mm:ss" change="handleChange"
+							placeholder="{i18n>CheckInTime}" value="{CheckInModel>CheckInTime}"/>
+						<!--<Text text="{path:'CheckInTime', type:'sap.ui.model.odata.type.Time' }"/>-->
+					</table:template>
+				</table:Column>
+				<table:Column autoResizable="true" width="150px" tooltip="{i18n>Material}">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "Material", "leadingProperty": "Material"}'/>
+					</table:customData>
+					<Label text="{i18n>Material}"/>
+					<table:template>
+						<Text text="{CheckInModel>Material}"/>
+					</table:template>
+				</table:Column>
+				<table:Column autoResizable="true" width="150px" tooltip="{i18n>MaterialRev}">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "MaterialRev", "leadingProperty": "MaterialRev"}'/>
+					</table:customData>
+					<Label text="{i18n>MaterialRev}"/>
+					<table:template>
+						<Text text="{CheckInModel>MaterialRev}"/>
+					</table:template>
+				</table:Column>
+				<table:Column autoResizable="true" width="150px" tooltip="{i18n>OperationDescription}">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "OperationDescription", "leadingProperty": "OperationDescription"}'/>
+					</table:customData>
+					<Label text="{i18n>OperationDescription}"/>
+					<table:template>
+						<Text text="{CheckInModel>OperationDescription}"/>
+					</table:template>
+				</table:Column>
+			</table:columns>
+		</table:Table>
+	</smartTable:SmartTable>
+</core:FragmentDefinition>

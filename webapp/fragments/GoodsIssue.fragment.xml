@@ -1,0 +1,145 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:table="sap.ui.table" xmlns:smartTable="sap.ui.comp.smarttable">
+	<smartTable:SmartTable id="GoodsIssueSmartTab" showFullScreenButton="false" entitySet="ZC_SD_GuaranteeDates_Maint_Rep"
+		useExportToExcel="true" smartFilterId="MCsmartFilterBar" exportType="GW" useVariantManagement="false" beforeRebindTable="onMCRebindTable"
+		useTablePersonalisation="true" tableType="Table" beforeExport="onMassExcelDownload"
+		persistencyKey="SmartTabSalesContracts_MassChanges_ExcelUPLD" enableAutoBinding="false" visible="true" showRowCount="false"
+		ignoredFields="VCMaterial">
+		<smartTable:customToolbar>
+			<OverflowToolbar style="Clear">
+				<!--<Title id="title" text="Materials ({=${materialList>/}.length})"/>-->
+				<!--<core:Icon src="sap-icon://information" press="onStatusCount"></core:Icon>-->
+				<ToolbarSpacer/>
+				<!--<Button text="{i18n>Download}" press="onExcelTemplateDownload" type="Transparent"></Button>-->
+				<Button id="GoodsIssueBtn" text="{i18n>GoodsIssue}" press="onGoodsIssue" type="Transparent" enabled="true"/>
+			</OverflowToolbar>
+		</smartTable:customToolbar>
+		<table:Table id="GoodsIssueTab" editable="true" enableColumnFreeze="true" selectionMode="Multi">
+			<table:columns>
+				<table:Column autoResizable="true" width="150px" tooltip="{i18n>ProductionOrder}" sortProperty="ProductionOrder">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "ProductionOrder", "leadingProperty": "ProductionOrder"}'/>
+					</table:customData>
+					<Label text="{i18n>ProductionOrder}"/>
+					<table:template>
+						<Text text="{ProductionOrder}"/>
+					</table:template>
+				</table:Column>
+				<table:Column autoResizable="true" width="150px" tooltip="{i18n>OperationNumber}" sortProperty="OperationNumber"
+					filterProperty="OperationNumber">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "OperationNumber", "leadingProperty": "OperationNumber"}'/>
+					</table:customData>
+					<Label text="{i18n>OperationNumber}"/>
+					<table:template>
+						<Text text="{OperationNumber}"/>
+					</table:template>
+				</table:Column>
+				<table:Column autoResizable="true" width="150px" tooltip="{i18n>SetupRun}" sortProperty="SetupRun" filterProperty="SetupRun">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "SetupRun", "leadingProperty": "SetupRun"}'/>
+					</table:customData>
+					<Label text="{i18n>SetupRun}"/>
+					<table:template>
+						<Text text="{SetupRun}"/>
+					</table:template>
+				</table:Column>
+				<table:Column autoResizable="true" hAlign="Right" width="250px" tooltip="{i18n>CheckInDate}">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "CheckInDate", "leadingProperty": "CheckInDate"}'/>
+					</table:customData>
+					<Label text="{i18n>CheckInDate}"/>
+					<table:template>
+						<Text text="{path:'CheckInDate',type: 'sap.ui.model.type.Date',formatOptions: { UTC: true } }"/>
+					</table:template>
+				</table:Column>
+				<table:Column autoResizable="true" hAlign="Right" width="150px" tooltip="{i18n>CheckInTime}">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "CheckInTime", "leadingProperty": "CheckInTime"}'/>
+					</table:customData>
+					<Label text="{i18n>CheckInTime}"/>
+					<table:template>
+						<!--<Text text="{CheckInTime}"></Text>-->
+						<Text text="{path:'CheckInTime', type:'sap.ui.model.odata.type.Time' }"/>
+					</table:template>
+				</table:Column>
+				<table:Column autoResizable="true" hAlign="Right" width="250px" tooltip="{i18n>CheckOutDate}">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "CheckOutDate", "leadingProperty": "CheckOutDate"}'/>
+					</table:customData>
+					<Label text="{i18n>CheckOutDate}"/>
+					<table:template>
+						<Text text="{path:'CheckOutDate',type: 'sap.ui.model.type.Date',formatOptions: { UTC: true } }"/>
+					</table:template>
+				</table:Column>
+				<table:Column autoResizable="true" hAlign="Right" width="150px" tooltip="{i18n>CheckOutTime}">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "CheckOutTime", "leadingProperty": "CheckOutTime"}'/>
+					</table:customData>
+					<Label text="{i18n>CheckOutTime}"/>
+					<table:template>
+						<!--<Text text="{CheckOutTime}"></Text>-->
+						<Text text="{path:'CheckOutTime', type:'sap.ui.model.odata.type.Time' }"/>
+					</table:template>
+				</table:Column>
+				
+				<table:Column autoResizable="true" width="150px" tooltip="{i18n>YieldQuantity}">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "YieldQuantity", "leadingProperty": "YieldQuantity"}'/>
+					</table:customData>
+					<Label text="{i18n>YieldQuantity}"/>
+					<table:template>
+						<Text text="{YieldQuantity}"/>
+					</table:template>
+				</table:Column>
+				<table:Column autoResizable="true" width="150px" tooltip="{i18n>ScrapQuantity}">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "ScrapQuantity", "leadingProperty": "ScrapQuantity"}'/>
+					</table:customData>
+					<Label text="{i18n>ScrapQuantity}"/>
+					<table:template>
+						<Text text="{ScrapQuantity}"/>
+					</table:template>
+				</table:Column>
+				<table:Column autoResizable="true" width="150px" tooltip="{i18n>ScrapType}">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "ScrapType", "leadingProperty": "ScrapType"}'/>
+					</table:customData>
+					<Label text="{i18n>ScrapType}"/>
+					<table:template>
+						<Text text="{ScrapType}"/>
+					</table:template>
+				</table:Column>
+				<table:Column autoResizable="true" hAlign="Right" width="150px" tooltip="{i18n>SetupTime}">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "SetupTime", "leadingProperty": "SetupTime"}'/>
+					</table:customData>
+					<Label text="{i18n>SetupTime}"/>
+					<table:template>
+						<!--<Text text="{SetupTime}"></Text>-->
+						<Text text="{path:'SetupTime', type:'sap.ui.model.odata.type.Time' }"/>
+					</table:template>
+				</table:Column>
+				<table:Column autoResizable="true" hAlign="Right" width="150px" tooltip="{i18n>MachineTime}">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "MachineTime", "leadingProperty": "MachineTime"}'/>
+					</table:customData>
+					<Label text="{i18n>MachineTime}"/>
+					<table:template>
+						<!--<Text text="{MachineTime}"></Text>-->
+						<Text text="{path:'MachineTime', type:'sap.ui.model.odata.type.Time' }"/>
+					</table:template>
+				</table:Column>
+				<table:Column autoResizable="true" hAlign="Right" width="150px" tooltip="{i18n>LaborTime}">
+					<table:customData>
+						<core:CustomData key="p13nData" value='\{"columnKey": "LaborTime", "leadingProperty": "LaborTime"}'/>
+					</table:customData>
+					<Label text="{i18n>LaborTime}"/>
+					<table:template>
+						<!--<Text text="{LaborTime}"></Text>-->
+						<Text text="{path:'LaborTime', type:'sap.ui.model.odata.type.Time' }"/>
+					</table:template>
+				</table:Column>
+			</table:columns>
+		</table:Table>
+	</smartTable:SmartTable>
+</core:FragmentDefinition>

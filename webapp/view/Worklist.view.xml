@@ -1,0 +1,31 @@
+<mvc:View controllerName="com.nttdata.acumed.Z27CheckInCheckOut.controller.Worklist" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:core="sap.ui.core">
+	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
+		<semantic:titleHeading>
+			<Title text="{i18n>worklistTitle}" level="H2"/>
+		</semantic:titleHeading>
+		<semantic:content>
+			<IconTabBar id="idIconTabBar" select=".onFilterSelect" class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter icon="sap-icon://activity-items" iconColor="Negative" design="Horizontal" count="" text="{i18n>Checkin}" key="Checkin">
+						<content>
+							<core:Fragment fragmentName="com.nttdata.acumed.Z27CheckInCheckOut.fragments.CheckIn" type="XML"></core:Fragment>
+						</content>
+					</IconTabFilter>
+					<IconTabSeparator icon="sap-icon://open-command-field"/>
+					<IconTabFilter icon="sap-icon://activity-2" iconColor="Critical" design="Horizontal" count="" text="{i18n>Checkout}" key="Checkout">
+						<content>
+							<core:Fragment fragmentName="com.nttdata.acumed.Z27CheckInCheckOut.fragments.CheckOut" type="XML"></core:Fragment>
+						</content>
+					</IconTabFilter>
+					<IconTabSeparator icon="sap-icon://open-command-field"/>
+					<IconTabFilter icon="sap-icon://supplier" iconColor="Positive" design="Horizontal" count="" text="{i18n>GoodsIssue}" key="GoodsIssue">
+						<content>
+							<core:Fragment fragmentName="com.nttdata.acumed.Z27CheckInCheckOut.fragments.GoodsIssue" type="XML"></core:Fragment>
+						</content>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</semantic:content>
+	</semantic:SemanticPage>
+</mvc:View>
